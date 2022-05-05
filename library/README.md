@@ -1,1 +1,1 @@
-# This is  a library package 
+# This repository is for a library package 
