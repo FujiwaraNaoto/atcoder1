@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "utility": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "istream": "cpp",
+        "iosfwd": "cpp"
     }
 }
