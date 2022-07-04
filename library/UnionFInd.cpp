@@ -6,21 +6,21 @@
 class UnionFind{
 
 public:
-    vector<int> par;
-    vector<int> rank;
+    std::vector<int> par;
+    std::vector<int> rank;
 
     UnionFind(int size){
-        rank=vector<int>(size+1,0);
+        rank=std::vector<int>(size+1,0);
         
-        par = vector<int>(size+1,0);
+        par = std::vector<int>(size+1,0);
         iota(par.begin(),par.end(),0);//#include<numeric>
     }  
 
     
 
     ~UnionFind(){
-        vector<int>().swap(rank);
-        vector<int>().swap(par);
+        std::vector<int>().swap(rank);
+        std::vector<int>().swap(par);
     }  
 
 
