@@ -6,7 +6,7 @@ bigint[nelem] のようにして,配列巨大なIntとみなす
 //各々のメソッドに関して,完成 とつけるべし
 */
 #include<vector>
-#include<stream>//for ostream and istream
+#include<sstream>//for ostream and istream
 #include<iostream>
 
 

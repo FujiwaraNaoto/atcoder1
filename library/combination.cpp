@@ -1,3 +1,6 @@
+#include<iostream>
+#include<vector>
+typedef long long ll;
 
 //xのy乗
 int mod_pow(int x,int y,int mod){
@@ -19,7 +22,7 @@ int mod_pow(int x,int y,int mod){
 
 
 struct combination{
-    vector<int> fact,ifact;
+    std::vector<int> fact,ifact;
     combination(int n): fact(n+1),ifact(n+1){
         fact[0]=1;//0!=1通り
         for(int i=1;i<=n;i++) fact[i] = fact[i-1]*i%MOD;
@@ -60,7 +63,8 @@ ll mod_pow(ll x,ll y,ll mod){
 
 
 struct combination{
-    vector<ll> fact,ifact;
+    typedef long long ll;
+    std::vector<ll> fact,ifact;
     combination(ll n): fact(n+1),ifact(n+1){
         fact[0]=1;//0!=1通り
         for(ll i=1;i<=n;i++) fact[i] = fact[i-1]*i%MOD;
