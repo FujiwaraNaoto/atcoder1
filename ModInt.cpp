@@ -5,9 +5,18 @@
 class ModInt{
     long long x;
 public:
-    const long long int modint=998244353;
+    static const long long modint=998244353;
 
-    ModInt(long long x_):x(x_){};
+    ModInt(long long x_):x(x_){
+
+        if(x>=0){
+            x=x%modint;
+        }else{
+            //負の場合. 0以上にする操作を行う
+            x=x%modint;
+            x=(x+modint)%modint;
+        }
+    };
     ModInt():x(0){};
 
     ModInt& operator=(long long x_){
@@ -15,20 +24,64 @@ public:
         
     }
 
+    ModInt ModInv(){
+        //逆数
+
+
+    }
+
+    ModInt& operator*=(const ModInt& arg){
+        
+        x=x*arg.x;
+        return *this;
+    } 
+
+    ModInt& operator/=(const ModInt& arg){
+        
+    }
+
+    ModInt& operator+=(const ModInt& arg){
+        x=(x+arg.x)%modint;
+        return *this;
+    }
+
+    ModInt& operator-=(const ModInt& arg){
+        x=(x-arg.x+modint)%modint;
+        return *this;
+    }
+
+
+
     //静的でないメンバー参照は特定のオブジェクトを基準とする相対参照である必要があります    
-    friend inline ModInt operator+(const ModInt& arg1,const ModInt& arg2){
+    // static long long modint=998244353; とすればよいかな
+    friend ModInt operator+(const ModInt& arg1,const ModInt& arg2){
         return ModInt((arg1.x+arg2.x)%modint);
     }
 
-    friend inline ModInt operator+(const ModInt& arg1,const ModInt& arg2){
+    friend ModInt operator-(const ModInt& arg1,const ModInt& arg2){
         return ModInt((arg1.x-arg2.x+modint)%modint);
 
     }
 
-    friend inline ModInt operator*(const ModInt& arg1,const ModInt& arg2){
-
+    friend ModInt operator*(const ModInt& arg1,const ModInt& arg2){
+        return (arg1.x*arg2.x)%modint;
     }
 
+    friend ModInt operator/(const ModInt& arg1, const ModInt& arg2){
+        ModInt inv=div();
+
+        return arg1*inv%modint;
+    }
+
+    //等しいかどうか
+    friend bool operator==(const ModInt& arg1, const ModInt& arg2){
+        return (arg1.x==arg2.x);
+    }
+
+    //等しくないかどうか
+    friend bool operator!=(const ModInt& arg1, const ModInt& arg2){
+        return !(arg1==arg2);
+    }
 
     ModInt modpow(const ModInt& arg1,ll n){
         //x^n
@@ -61,3 +114,7 @@ public:
 
 
 };
+
+/*
+inline std::ostream<<(ostream&s) 
+*/
