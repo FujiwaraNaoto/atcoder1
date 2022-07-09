@@ -3,6 +3,7 @@
 // https://youtu.be/ERZuLAxZffQ?t=4807 : optimize
 // https://youtu.be/8uowVvQ_-Mo?t=1329 : division
 //https://atcoder.jp/contests/abc205/submissions/23459189
+/*
 const int mod = 1000000007;
 struct mint {
   ll x; // typedef long long ll;
@@ -92,21 +93,6 @@ istream& operator>>(istream& is, mint& a) { return is >> a.x;}
 ostream& operator<<(ostream& os, const mint& a) { return os << a.x;}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #include<cassert>// for assert
 
 // combination mod prime
@@ -125,4 +111,16 @@ struct combination {
     return fact[n]*ifact[k]*ifact[n-k];
   }
 };
- 
+*/
+
+/*
+class ModInt{
+  long long x;
+  long long mod=998244353;
+
+  ModIntinline friend operator+(const ModInt& arg1,const ModInt& arg2){
+    return arg1+arg2
+  }
+};
+*/
+

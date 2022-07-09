@@ -52,21 +52,20 @@ public:
     //a=bみたいにして用いる a.operator(b)を意味する
     BigInt& BigInt::operator=(const BigInt& x);
 
-
-    operator<<(){
-        //cin outにも対応できるようにする
-    }
+    
 
 
-    operator<(){
+    bool operator<()const{
         //比較演算子にも対応できるようにする
 
     }
 
-    operator==(){
+    bool operator==()const{
         //bitintが等しいかどうか
+
     }
 
+    /*
 
     ostream& operator<<(ostream& s, const BigInt& x){
         //リトルエンディアンでならんでるけど...
@@ -78,6 +77,13 @@ public:
         //ここ,どうする?
         return s;
     }
+    */
+
+   friend inline BigInt& operator+(const BigInt& arg1,const BigInt& arg2){
+ 
+   }
+
+
 }
 
 //代入演算子 
@@ -101,3 +107,15 @@ BigInt& BigInt::operator=(const BigInt & x){
 
     return *this;
 }
+
+inline std::ostream& operator<<(std::ostream& s, const BigInt& x){
+        //リトルエンディアンでならんでるけど...
+        return s<<x.bigint;
+        
+    }
+
+inline std::istream& operator>>(std::istream& s,BigInt& x){
+    //ここ,どうする?
+    return s;
+}
+
