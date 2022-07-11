@@ -19,9 +19,28 @@ public:
     //引数がなければ 0+0j
     Complex(double re_=0,double im_=0):re(re_),im(im_){};
 
+    /*
     ~Complex(){
         //do nothing
+        //compilerによってinline型が自動生成される
     }
+    */
+
+   //ここはComplex&にしてはいけない
+   // あくまでもコピーが渡されるようにしてほしいため 
+    Complex operator+(){
+        return {*this};
+
+    }
+
+    Complex operator-(){
+        //re=-re;
+        //im=-im;
+        //return *this;
+
+        return Complex(-re,-im);
+    }
+
 
 
     double real()const{
@@ -188,6 +207,12 @@ int main(){
     cout<<"c7="<<c7<<endl;//c5になるはず
     cout<<"c4*c5/c5="<<c4*c5/c5<<endl;
 
+
+    Complex c10(3,4),c11(1,2);
+    cout<<"+c10="<<+c10<<endl;
+    cout<<"-c10="<<-c10<<endl;
+    cout<<"-c10-c11="<<-c10-c11<<endl;
+    cout<<"-c10+c11="<<-c10+c11<<endl;
 
     Complex c02;//0+0jになるはず
     cout<<"c02="<<c02<<endl;
