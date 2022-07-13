@@ -1,6 +1,6 @@
 #include<sstream>
 #include<iostream>
-
+using namespace std;
 
 class ModInt{
     long long x;
@@ -24,12 +24,7 @@ public:
         
     }
 
-    ModInt ModInv(){
-        //逆数
-
-
-    }
-
+  
     ModInt& operator*=(const ModInt& arg){
         
         x=x*arg.x;
@@ -83,14 +78,23 @@ public:
         return !(arg1==arg2);
     }
 
-    ModInt modpow(const ModInt& arg1,ll n){
-        //x^n
+    
+    ModInt modpow(const ModInt& arg1,long long n){
+        //arg1^n
         if(modint==1){
             return 0;
         }
-        ModInt ret=1;
 
-        ll 
+        ModInt ret=1;
+        while(n>0){
+            if(n&1){
+                ret*=arg1;
+            }
+            arg1*=arg1;
+            n>>=1;
+        }
+
+        return ret;
 
     }
 
@@ -112,9 +116,24 @@ public:
 
     }
 
+    ModInt ModInv(ModInt x){
+        //逆数
+        if(x%modint==)
+        return modpow(x,modint-2);        
+
+    }
+
+
+
 
 };
 
 /*
 inline std::ostream<<(ostream&s) 
 */
+
+
+
+int main(){
+
+}
