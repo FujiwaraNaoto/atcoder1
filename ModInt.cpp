@@ -20,8 +20,8 @@ public:
     ModInt():x(0){};
 
     ModInt& operator=(long long x_){
-        x=(ModInt)x_
-        
+        x=x_;
+        return *this;
     }
 
   
@@ -31,8 +31,24 @@ public:
         return *this;
     } 
 
+    operator long long()const{
+        // ModIntからlong long へ
+        return x;
+    } 
+
+    ModInt& operator++(){
+
+        return *this;
+    }
+
     ModInt& operator/=(const ModInt& arg){
         
+        ModInt invarg = ModInv(arg.x);
+
+        x*=((long long)invarg);
+        x%=modint;
+        
+        return *this;
     }
 
     ModInt& operator+=(const ModInt& arg){
@@ -44,6 +60,13 @@ public:
         x=(x-arg.x+modint)%modint;
         return *this;
     }
+
+    /*
+    ModInt& operator%=(){
+        x%=modint;
+        return *this;
+    }
+    */
 
 
 
@@ -62,10 +85,11 @@ public:
         return (arg1.x*arg2.x)%modint;
     }
 
-    friend ModInt operator/(const ModInt& arg1, const ModInt& arg2){
-        ModInt inv=div();
 
-        return arg1*inv%modint;
+    friend ModInt operator%(const ModInt& arg1, const ModInt& arg2){
+        
+
+        return arg1%modint;
     }
 
     //等しいかどうか
@@ -85,12 +109,13 @@ public:
             return 0;
         }
 
+        ModInt p=arg1.x%modint;
         ModInt ret=1;
         while(n>0){
             if(n&1){
                 ret*=arg1;
             }
-            arg1*=arg1;
+            p*=p;
             n>>=1;
         }
 
@@ -98,7 +123,7 @@ public:
 
     }
 
-    ModInt modpow(const long long  arg1,long long  n){
+    ModInt modpow(const long long&  arg1,long long  n){
         //x^n
         if(modint==1){
             return 0;
@@ -116,12 +141,27 @@ public:
 
     }
 
-    ModInt ModInv(ModInt x){
+    ModInt ModInv(const ModInt& arg){
         //逆数
-        if(x%modint==)
-        return modpow(x,modint-2);        
-
+        if(arg.x%modint==0) return (ModInt)0;
+       
+        return modpow(arg.x,modint-2);        
     }
+
+    ModInt ModInv(long long arg){
+        //逆数
+        if(arg%modint==0) return (ModInt)0;
+       
+        return modpow(arg,modint-2);        
+    }
+
+    //静的でないメンバー参照は特定のオブジェクトを基準とする相対参照である必要があります
+    friend ModInt operator/(const ModInt& arg1, const ModInt& arg2){
+        ModInt inv=ModInv(arg2.x);
+
+        return arg1.x*inv.x%modint;
+    }
+
 
 
 
