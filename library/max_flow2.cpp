@@ -4,7 +4,7 @@ ABC225
 #include<iostream>
 #include<vector>
 #include<queue>
-using namespace std;
+//using namespace std;
 typedef long long ll;
 const ll INF=1LL<<59;
 
@@ -13,21 +13,27 @@ template<class T> //intになるかllになるか
 class FLOW{
     public:
     struct edge{int from; int to;  T cap; int rev;};    
-    vector<T> level;
-    vector<T> iter;
+    std::vector<T> level;
+    std::vector<T> iter;
    
-    vector<vector<edge> > G{};//vector
+    std::vector<std::vector<edge> > G{};//vector
 
     int numV=0;
 
     //constructor
-    FLOW(int V){
-        numV=V;
+    FLOW(int v_):numV(v_){
+        
         G.resize(V+1);//G[0],G[1],...,G[V]を作る
-        level = vector<T>(V+1,0);
-        iter  = vector<T>(V+1,0);
+        level = vector<T>(numV+1,0);
+        iter  = vector<T>(numV+1,0);
     }
- 
+    
+    ~FLOW(){
+        std::vector<T>().swap(level);
+        std::vector<T>().swap(iter);
+        
+    }
+
     void add_edge(int from,int to,T cap){
         G[from].push_back((edge){from,to,cap,(int)G[to].size()} );
         G[to].push_back((edge){to,from,0,(int)G[from].size()-1});
@@ -88,8 +94,8 @@ class FLOW{
     }
 
 
-    vector<edge> edges(){
-        vector<edge> ret;
+    std::vector<edge> edges(){
+        std::vector<edge> ret;
         for(int i=0;i<=numV;i++){
             for(auto e: G[i]){//二部グラフの場合cap==0の時にその経路を通ったということ
                 ret.push_back(e);
