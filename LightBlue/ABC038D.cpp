@@ -15,30 +15,42 @@ const int INF=1<<30;
 /*
 要素のインデックスとベクトルのインデックスが1ずれていることに注意すべし
 */
-class BinaryIndexTree{
-public:
-int bitsize;
-vector<int> bit;
 
-   BinaryIndexTree(int bitsize_):bitsize(bitsize_+1){
-     bit=vector<int>(bitsize+2,0);
-   }
+//long long もしくはIntを想定している
+template<class Type> class BinaryIndexTree{
+public:
+    int bitsize;
+    vector<Type> bit;
+
+    BinaryIndexTree(int bitsize_):bitsize(bitsize_+1){
+      bit=vector<Type>(bitsize+2,0);
+    }
    ~BinaryIndexTree(){
-     vector<int>().swap(bit);
+     vector<Type>().swap(bit);
    }
     
     //i番目の要素を更新　iは0から
-    void update(int i,int x){
-        i+=1;//ここ大事
+    void update(int i,Type x){
+        i+=1;//ここ大事 インデックスを1からに補正する
       while(i<bitsize){
         bit[i]=max(x,bit[i]);
         i+= i&-i;
       }
     }
 
+    /*
+    Type& operator[](int i){
+        //代入の場合
+        update()
+        return bit[i+1];
+    }
+
+    const Type&
+    */
+   
    //0~iまでの中で最大値
-    int get(int i){
-     int ans=-INF;
+    Type get(int i){
+     Type ans=-INF;
      i+=1;
      while(i>0){
         ans=max(ans,bit[i]);
@@ -47,8 +59,9 @@ vector<int> bit;
 
      return ans;
 
-   }
+    }
 };
+
 
 
 int main(){
@@ -70,7 +83,7 @@ int main(){
         }
     });
 
-    BinaryIndexTree BIT(100000);
+    BinaryIndexTree<int> BIT(100000);
 
     int ans=0;
     
