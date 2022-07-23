@@ -7,7 +7,55 @@ https://atcoder.jp/contests/dp/tasks/dp_t
 #include<iostream>
 #include<vector>
 using namespace std;
-typedef long long ll;
+//typedef long long ll;
+
+//最大値を求める
+//long long もしくはIntを想定している
+template<class Type> class BinaryIndexTree{
+public:
+    int bitsize;
+    std::vector<Type> bit;
+
+    BinaryIndexTree(int bitsize_):bitsize(bitsize_+1){
+      bit=std::vector<Type>(bitsize+2,0);
+    }
+   ~BinaryIndexTree(){
+     std::vector<Type>().swap(bit);
+   }
+    
+    //i番目の要素を更新　iは0から
+    void update(int i,Type x){
+        i+=1;//ここ大事 インデックスを1からに補正する
+      while(i<bitsize){
+        bit[i]=max(x,bit[i]);
+        i+= i&-i;
+      }
+    }
+
+    /*
+    Type& operator[](int i){
+        //代入の場合
+        update()
+        return bit[i+1];
+    }
+
+    const Type&
+    */
+   
+   //0~iまでの中で最大値
+    Type get(int i){
+     Type ans=-INF;
+     i+=1;
+     while(i>0){
+        ans=max(ans,bit[i]);
+        i -= i&-i;
+     }
+
+     return ans;
+
+    }
+};
+
 
 //binary_indexed_tree bit;
 struct binary_indexed_tree{

@@ -4,6 +4,12 @@ using namespace std;
 vector<int> P,I,Iinv;
 vector<int> ansR,ansL;
 
+/*
+dfs(Pのインデックスで,根がroot=P[s]になる値, Pの端っこで根がrootの部分木に属す,
+Iのインデックスで根がrootとなる部分木の最も左端,
+Iのインデックスで根がrootとなる部分木の最も右側
+)
+*/
 bool dfs(int s,int t,int S,int T){
 
     int now=P[s];//今見ている頂点
@@ -19,7 +25,7 @@ bool dfs(int s,int t,int S,int T){
     }
 
     if(T-p>0){
-        //ansR[now]=I[p-1];//これは無理
+        //ansR[now]=I[p-1];//これは無理 帰りがけの性質からあきらか
         ansR[now]=P[s+p-S+1];
         if(!dfs(s+p-S+1,t,p+1,T)) return false;
     }
