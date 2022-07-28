@@ -36,8 +36,7 @@ int main(){
     for(int i=0;i<N;i++){  
 
         //a[0]==0 && b[0]==0　のときを回避する必要ある
-        //if(a[0]==0 && b[0]==0){
-        //if(fabs(a[i]-0.0)>1e-5 || fabs(b[i]-0.0)>1e-5 ){
+        // これはのちのatan2で困る
          if(a[i]!=0 || b[i]!=0 ){
             swap(a[0],a[i]);
             swap(b[0],b[i]);
@@ -64,10 +63,13 @@ int main(){
             tmpD=a[k]*sin(theta)+b[k]*cos(theta);
             bool flag2=false;
             for(int j=0;j<N;j++){
+                //一つでも一致するものがあればよい
+                //必ず全部の(c,d)が回転を通して座標が変化する
+                //システム上同じjに対して(k1,j), (k2,j)となることなるk1,k2は存在しない
                 if( fabs(tmpC-c[j])<=1e-5 && fabs(tmpD-d[j])<=1e-5 ) flag2=true;
             }
 
-            flag &=flag2;
+            flag &=flag2;//少なくとも一つflag2がfalseとなると, flagはfalseとなる
 
         }
 
