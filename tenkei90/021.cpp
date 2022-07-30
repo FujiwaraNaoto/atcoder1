@@ -1,12 +1,11 @@
-
+/*
+競プロ典型 021
+Come Back In One Piece
+*/
 #include<iostream>
 #include<vector>
 #include<algorithm>
-//using namespace std;
 
-/*
-後の頂点であればあるほど,強連結成分の番号が小さい
-*/
 
 class SCC{
 
@@ -62,6 +61,7 @@ class SCC{
         }
 
         ~SCC(){
+            
             std::vector<std::vector<int>>().swap(G);
             std::vector<std::vector<int>>().swap(rG);
             std::vector<int>().swap(cmp);
@@ -82,6 +82,7 @@ class SCC{
             for(int v=0;v<V;v++){
                 if(!used[v]) dfs(v);
             }
+            std::vector<bool>().swap(used);
             used = std::vector<bool>(V,false);
             int k=0;
             
@@ -97,7 +98,43 @@ class SCC{
                 //頂点v
                 sccgroup[cmp[v]].push_back(v);//
             }
+            std::vector<bool>().swap(used);
+
             return k;
         }
 
 };
+
+
+
+
+
+using namespace std;
+typedef long long ll;
+
+int main(){
+    int N;
+    int M;
+    cin>>N>>M;
+    vector<int> A(M),B(M);
+
+    SCC scc(N,M);//頂点数
+    for(int i=0;i<M;i++){
+        cin>>A[i]>>B[i];
+        A[i]--;B[i]--;
+        scc.add_edge(A[i],B[i]);//A[i]からB[i]へ辺を張る    
+    }
+
+    int num_group = scc.scc();//できるグループ数
+    //cout<<"num_group="<<num_group<<endl;
+    
+    ll ans=0;
+    for(int idx=0;idx<num_group;idx++){
+        int n = scc.sccgroup[idx].size();
+        ans+=1LL*n*(n-1)/2;
+    }
+    cout<<ans<<endl;
+
+
+
+}
