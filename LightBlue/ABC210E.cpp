@@ -1,7 +1,16 @@
+/*
+AC
+Kruscalのアルゴリズムの高速化をおこなう
+UnionFindはもちいない.
+*/
 #include<iostream>
 #include<map>
 #include<numeric>
+#include<algorithm>
 #include<vector>
+using namespace std;
+typedef long long ll;
+typedef pair<ll,ll> P;
 
 class UnionFind{
 
@@ -56,42 +65,48 @@ public:
         }
     }
 
-    int size(int u){//頂点uが属すグループの大きさを表す.
+    int size(int u){
         u=find(u);
         return sz[u];
     }
 };
 
+ll gcd(ll x,ll y){
+    if(y==0)return x;
+    else return gcd(y,x%y);
+}
 
-//ABC238
-//https://atcoder.jp/contests/abc238/editorial/3360
-//union_find_tree
-struct union_find{
-    int N;
-    vector<int> par, siz;
-    union_find(int n) : N(n){
-        par.resize(N);
-        siz.resize(N, 1);
-        for(int i=0; i<N; i++) par[i] = i;
+
+int main(){
+    ll N;
+    int M;
+    cin>>N>>M;
+    vector<ll> C(M),A(M);
+
+    vector<P> edges;
+    for(int i=0;i<M;i++){
+        cin>>A[i]>>C[i];
+        edges.emplace_back(C[i],A[i]);
     }
-    int root(int X){
-        if(par[X] == X) return X;
-        return par[X] = root(par[X]);
+
+    sort(edges.begin(),edges.end());
+    //N<10^5 とかなら O(NlogN)でおとせるけどね
+
+    ll cur=N;
+
+    ll ans=0;
+    for(auto [c,a]:edges){
+        ll tmp=gcd(cur,a);
+        
+        ans+=1LL*c*(cur-tmp);
+
+        cur=tmp;
+        //if(tmp==1LL) break;
     }
-    bool same(int X, int Y){
-        return root(X) == root(Y);
+
+    if(cur!=1LL){
+        ans=-1;
     }
-    void unite(int X, int Y){
-        X = root(X);
-        Y = root(Y);
-        if(X == Y) return;
-        if(siz[Y] < siz[X]) std::swap(X, Y);
-        par[X] = Y;
-        siz[Y] += siz[X];
-        siz[X] = 0;
-    }
-};
 
-
-
-
+    cout<<ans<<endl;
+}
