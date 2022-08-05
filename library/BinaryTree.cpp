@@ -151,20 +151,21 @@ template<class Type> struct binary_indexed_tree{
 };
 
 
-//割り算がないパターン
 
-struct binary_indexed_tree{
+template<class Type> struct binary_indexed_tree{
     int N;
-    vector<ll> bit;
+    vector<Type> bit;
     
-    binary_indexed_tree(){};//ただのコンストラクタ
+  
 
-    void init(int n){
-        bit = vector<ll>(n+1,0);
+    binary_indexed_tree(int n):N(n+1){
+        bit = vector<Type>(n+1,0);
         N=n+1;
     }
 
-    void add(int x,ll a){
+
+
+    void add(int x,Type a){
         x++;//1から始めるための補正
         //for(int i=x; i<=N; i+=(i&-i)) bit[i] = addition(bit[i],a);
         while(x<=N){
@@ -173,9 +174,11 @@ struct binary_indexed_tree{
             x += x&-x;
         }
     }
-    ll sum(int x){
+
+    
+    Type sum(int x){
         x++;//1から始まることに注意
-        ll ret=0;
+        Type ret=0;
         //for(int i=x; i>0; i-=(i&-i)) ret = addition(ret,bit[i]);
         while(x>0){
             ret = ret+bit[x];
@@ -186,12 +189,11 @@ struct binary_indexed_tree{
     }
 
     //[l,r]の範囲
-    ll get(int l,int r){
+    // rはN-1以下
+    Type get(int l,int r){
         if(r>N) return 0;//配列の外へのアクセス
         if(l>r) return 0;//本来は l<=r となるのでおかしい
         if(l==0) return sum(r);//[0,r]//ここでoutなわけか
         else return (sum(r) - sum(l-1));
     }
-
-    
 };
