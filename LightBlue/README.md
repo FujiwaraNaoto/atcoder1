@@ -11,6 +11,7 @@
 
 - ABC207D
 - ABC210C 尺取り法
+- ABC210D dpを二回用いる
 - ABC210E 良問
 - ABC215D
 - ABC216D
@@ -22,6 +23,8 @@
 - ABC230D
 - ABC231F
 - ABC242E
+- ABC242F 数え上げ　包除原理
+- ABC244C 動的入力
 - ABC248E
 - ABC248F 漸化式　同じものをまとめる
 - ABC249D

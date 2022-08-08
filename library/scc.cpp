@@ -1,8 +1,11 @@
+/*
+strongly connected component
+*/
 
 #include<iostream>
 #include<vector>
 #include<algorithm>
-//using namespace std;
+
 
 /*
 後の頂点であればあるほど,強連結成分の番号が小さい
