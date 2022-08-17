@@ -9,6 +9,7 @@
 - ABC120D
 - ARC143A
 - ARC143B
+- ABC149D dp 
 
 - ABC207D
 - ABC210C 尺取り法
@@ -22,15 +23,18 @@
 - ABC221C
 - ABC226F ガチの数学　漸化式で数え上げ
 - ABC230D
+- ABC238D
 - ABC231F
 - ABC242E
 - ABC242F 数え上げ　包除原理
 - ABC244C 動的入力
+- ABC245E ソート
 - ABC248E
 - ABC248F 漸化式　同じものをまとめる
 - ABC249D
 - ABC249F
 - ABC251E
+- ABC253E 
 - ABC254D
 - ABC255D
 - ABC255F

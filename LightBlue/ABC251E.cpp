@@ -49,3 +49,36 @@ int main(){
     ll ans=min(dp[N][0][0],dp[N][1][1]);
     cout<<ans<<endl;
 }
+
+/*
+これでもいい
+
+int main(){
+
+    int N;
+    cin>>N;
+    vector<ll> A(N);
+    for(int i=0;i<N;i++){
+        cin>>A[i];
+    }
+    vector dp(N+1,vector<vector<ll>>(2,vector<ll>(2,INF)));
+
+    dp[0][0][0]=0;
+    dp[0][1][1]=0;
+
+    for(int i=0;i<N;i++){
+        for(int flag=0;flag<2;flag++){
+
+            dp[i+1][flag][1]=min(dp[i][flag][0]+A[i],dp[i][flag][1]+A[i]);
+            dp[i+1][flag][0]=dp[i][flag][1];
+
+        }
+    }
+    ll ans=INF;
+    
+    ans=min(dp[N][0][0],dp[N][1][1]);
+    cout<<ans<<endl;
+
+}
+
+*/
