@@ -20,8 +20,14 @@
 - ABC216E-1
 - ABC216E-2
 - ABC218C
+- ABC219D 配るDP
+- ABC220E 漸化式. もしくは　決め打ちのあとで数え上げ
+- ABC220F グラフの工夫
 - ABC221C
+- ABC226C グラフの基礎
+- ABC226E
 - ABC226F ガチの数学　漸化式で数え上げ
+- ABC227D
 - ABC230D
 - ABC238D
 - ABC231F
