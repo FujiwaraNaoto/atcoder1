@@ -66,6 +66,11 @@ template<class Type> class segment_tree{
             dat = vector<Type>(2*n-1,0);// 0,1,2,...,2*n-1,2*n-2
         }
 
+        ~segment_tree(){
+            vector<Type>().swap(dat);
+        }
+
+
 
         void update(int k,Type a){
             k+=n-1;
@@ -82,8 +87,8 @@ template<class Type> class segment_tree{
             if(a<=l && r<=b) return dat[k];
             else{
 
-                ll vl = query(a,b,2*k+1,l,(l+r)/2);
-                ll vr = query(a,b,2*k+2,(l+r)/2,r);
+                Type vl = query(a,b,2*k+1,l,(l+r)/2);
+                Type vr = query(a,b,2*k+2,(l+r)/2,r);
                 return max(vl,vr);
             }
         }

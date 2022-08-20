@@ -62,12 +62,18 @@ struct binary_indexed_tree{
     int N;
     vector<ll> bit;
     
-    binary_indexed_tree(){};//ただのコンストラクタ
-
-    void init(int n){
+    //binary_indexed_tree(){};//ただのコンストラクタ
+    
+    binary_indexed_tree(int n){
         bit = vector<ll>(n+1,0);
         N=n+1;
     }
+
+    ~binary_indexed_tree(){
+        vector<ll>().swap(bit);
+    }
+
+
 
     ll addition(ll x, ll y){
         return (x+y)%MOD;
@@ -100,8 +106,10 @@ struct binary_indexed_tree{
         else return (sum(r) - sum(l-1)+MOD)%MOD;
     }
 
+
     
 };
+
 
 
 
