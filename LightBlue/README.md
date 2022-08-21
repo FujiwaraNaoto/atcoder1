@@ -20,6 +20,7 @@
 - ABC216E-1
 - ABC216E-2
 - ABC218C
+- ABC219C ソート
 - ABC219D 配るDP
 - ABC219E 連結判定とbit全探索
 - ABC220E 漸化式. もしくは　決め打ちのあとで数え上げ
@@ -35,6 +36,7 @@
 - ABC231F
 - ABC242E
 - ABC242F 数え上げ　包除原理
+- ABC242G Mo's algorithm
 - ABC244C 動的入力
 - ABC245E ソート
 - ABC248E
@@ -42,6 +44,9 @@
 - ABC249D
 - ABC249F
 - ABC251E
+- ABC252D 真ん中を決め打ちで全探索
+- ABC252E ダイクストラ法
+- ABC252F ハフマン符号
 - ABC253E 
 - ABC254D
 - ABC255D
