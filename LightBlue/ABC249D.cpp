@@ -22,7 +22,7 @@ vector<vector<int>> d(200000+1,vector<int>{});
 void init2(){
     for(int i=1;i<=MAX_N;i++){
         for(int k=i;k<=MAX_N;k+=i){
-            d[k].push_back(i);
+            d[k].push_back(i);//kの約数を列挙していく.　前計算でO(NlogN)
         }
     }
 }
