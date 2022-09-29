@@ -10,9 +10,11 @@
 - ABC141E
 - ARC143A
 - ARC143B
+- ABC147C,D D:桁ごとに独立に考える
 - ABC149D dp 
 
 - ABC207D
+- ABC208C mapを用いると実装が楽
 - ABC210C 尺取り法
 - ABC210D dpを二回用いる
 - ABC210E 良問
@@ -51,6 +53,7 @@
 - ABC253E 
 - ABC254D
 - ABC255D
+- ABC255E 
 - ABC255F
 - ABC257C ソート
 - ABC257D
