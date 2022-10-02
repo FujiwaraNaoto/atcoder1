@@ -52,3 +52,49 @@ int main(){
 
 
 }
+
+
+// int main(){
+//     int H,W,N;
+//     cin>>H>>W>>N;
+//     vector<PP> vec;
+//     vector<int> r(N),c(N);
+//     vector<int> a(N);
+//     //vector<points>
+//     map<int,vector<P>> mp;
+//     for(int i=0;i<N;i++){
+//         cin>>r[i]>>c[i]>>a[i];
+//         mp[-a[i]].emplace_back(r[i],c[i]);//値が大きいマスから考えるべき
+//     }
+
+//     map<int,int> dp_r,dp_c;
+//     map<P,int> ans;
+
+//     for(auto [_,vec]:mp){//aが同じ値のときのための対策.
+//         vector<PP> tmp;
+//         for(auto [y,x]:vec){
+//             int cnt=max(dp_r[y],dp_c[x]);
+//             tmp.emplace_back(cnt,P{y,x});
+//         }
+//         //同じaに対しての処理.
+//         for(auto [cnt,p]:tmp){
+//             auto [y,x]=p;
+//             ans[p]=cnt;
+//             dp_r[y]=max(dp_r[y],cnt+1);//更新
+//             dp_c[x]=max(dp_c[x],cnt+1);
+//         }
+//         vector<PP>().swap(tmp);
+
+//     }
+
+//     for(int i=0;i<N;i++){
+//         //cin>>r[i]>>c[i]>>a[i];
+//         cout<<ans[P{r[i],c[i]}]<<endl;
+//     }
+
+
+
+    
+
+
+// }
