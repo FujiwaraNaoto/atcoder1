@@ -65,9 +65,10 @@
 - ABC263C 再帰
 - ABC263D 累積和
 - ABC265E map dp
+- ABC266B
 - ABC266D 二つの実装方法 どちらもDP
 - ABC266F 実装が難しい
-
+- ABC271D DP練習
 
 - ARC137B
 - ARC138A ソートをどのように解くか?
@@ -82,3 +83,11 @@
 - 074
 - 086
 - 072
+
+
+Educational DP contests
+- EDPCG (トポロジカルソート)
+- EDPCK (再帰,dp)
+- EDPCJ
+- EDPCM
+- EDPCO (bitDP)
