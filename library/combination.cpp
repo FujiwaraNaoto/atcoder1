@@ -2,6 +2,26 @@
 #include<vector>
 typedef long long ll;
 
+// comb(n,r) = n C r 
+// nCr = (n-1)C(r-1) + (n-1)Cr
+std::vector<std::vector<ll>> init(){
+  auto comb =std::vector<std::vector<ll>>(N+1,std::vector<ll>(N+1,0));
+
+    for(int j=0;j<=N;j++){comb[j][j]=1;}
+    for(int j=0;j<=N;j++){comb[j][0]=1;}
+
+    for(int i=2;i<=N;i++){
+        for(int j=1;j+1<=i;j++){
+            comb[i][j]=comb[i-1][j-1]+comb[i-1][j];
+        }
+    }
+    return comb;
+}
+
+
+
+
+
 //xのy乗
 int mod_pow(int x,int y,int mod){
     int power=x;
