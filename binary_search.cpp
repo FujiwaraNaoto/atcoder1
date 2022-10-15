@@ -4,6 +4,18 @@ aが単調増加のときに,
 lower_bound(a.begin(),a.end(),k)は k<=ai となる最小のaiのポインタを返す.
 upper_bound(a.begin(),a.end(),k)は k<ai となる最小のaiのポインタを返す.
 
+
+auto it = lower_bound(a.begin(),a.end(),k)で 
+itにはxの値か,xより大きいの最小の数を指すイテレータが入る.
+
+it--で　xの値より小さい,最大の数を指すイテレータが入る
+
+
+auto it = upper_bound(a.begin(),a.end(),k)で 
+it!=a.end()ならば *itにはxより大きい最小の数が入る.
+
+
+
 */
 #include<iostream>
 #include<vector>
