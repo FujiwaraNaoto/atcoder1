@@ -9,14 +9,16 @@ public:
     std::vector<int> par;
     std::vector<int> rank;
     std::vector<int> sz;//sz[i]で,頂点iが含まれているグループのサイズ
-
+    std::vector<int> root;
 
     UnionFind(int size){
         rank=std::vector<int>(size+1,0);
         
         par = std::vector<int>(size+1,0);
-        iota(par.begin(),par.end(),0);//#include<numeric>
+        std::iota(par.begin(),par.end(),0);//#include<numeric>
         sz = std::vector<int>(size+1,1);
+        root=std::vector<int>(size+1);
+        std::iota(root.begin(),root.end(),0);
     }  
 
     
@@ -25,6 +27,7 @@ public:
         std::vector<int>().swap(rank);
         std::vector<int>().swap(par);
         std::vector<int>().swap(sz);
+        std::vector<int>().swap(root);
     }  
 
 
@@ -59,6 +62,16 @@ public:
     int size(int u){//頂点uが属すグループの大きさを表す.
         u=find(u);
         return sz[u];
+    }
+
+    std::map<int,std::vector<int>> element(){
+        std::map<int,std::vector<int>> mp;
+        for(int i=0;i<par.size();i++){
+            root[i]=find(i);
+            mp[root[i]].push_back(i);
+        }
+        return mp;
+
     }
 };
 
