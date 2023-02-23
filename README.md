@@ -18,3 +18,39 @@ Command + K の後に V
  ```
  g++ priority_queue.cpp -o p -std=c++17
  ```
+
+# Running sample
+
+For running,
+
+create a test page
+```
+vim sample.txt
+```
+add sample case (ex.ABC218G)
+```
+6
+2 2 6 4 6 6
+1 2
+2 3
+4 6
+2 5
+2 6
+```
+save the file 
+```
+:wq
+```
+
+then, compile c++ file (ex. ABC218G.cpp)
+```
+g++ ABC218G.cpp -o p -std=c++17
+```
+and
+```
+p < sample.txt
+```
+
+
+
+

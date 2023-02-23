@@ -299,6 +299,7 @@ struct bigint {
 				sign = -sign;
 			++pos;
 		}
+		//string について.位が低いほうほど後ろに表記されている.
 		for (int i = s.size() - 1; i >= pos; i -= base_digits) {
 			int x = 0;
 			for (int j = max(pos, i - base_digits + 1); j <= i; j++)
