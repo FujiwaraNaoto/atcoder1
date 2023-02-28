@@ -11,6 +11,9 @@ Command + K の後に V
  
  - how to print decimal with the designated number of digits, see decimal.cpp
 
+ - how to check random case,
+ see checker.cpp (This code is convenient when you're solving adhoc questions)
+
 
  you have to compile them with options  -std=c++17 or  -std=c++11
 
