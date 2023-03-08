@@ -81,7 +81,7 @@ FLOW<ll> graph(頂点番号数);
 #include<queue>
 #include<set>
 typedef long long ll;
-typedef pair<int,int> P;
+typedef std::pair<int,int> P;
 const int INF=1<<29;
 
 
@@ -89,38 +89,47 @@ template<class T> class FLOW{
     //intになるかlong long になるか
     public:
     struct edge{int from; int to;  T cap; T flow; int rev;};    
-    vector<T> level;
-    vector<T> iter;
-    vector<vector<edge> > G;
-    typedef struct pair<int,int> P;
-    set<P> st;
+    std::vector<T> level;
+    std::vector<T> iter;
+    std::vector<std::vector<edge> > G;
+    typedef struct std::pair<int,int> P;
+    std::set<P> st;
     int numV=0;
 
     //constructor
     FLOW(int V){
         numV=V;
-        G = vector<vector<edge>>(V+1,vector<edge>{});
+        G = std::vector<std::vector<edge>>(V+1,std::vector<edge>{});
         //G[0],G[1],...,G[V]を作る
         
-        level = vector<T>(V+1,0);
-        iter  = vector<T>(V+1,0);
+        level = std::vector<T>(V+1,0);
+        iter  = std::vector<T>(V+1,0);
     }
+
+    std::vector<P> edgeIdx;
 
     void add_edge(int from,int to,T cap){
         // from to cap flow rev
-        
+        edgeIdx.emplace_back(std::make_pair(from,(int)G[from].size()));
         G[from].push_back((edge){from,to,cap,0,(int)G[to].size()} );
         st.insert(P(from,to));//順辺のみに興味がある
 
 
         G[to].push_back((edge){to,from,0,cap,(int)G[from].size()-1});
     }
+
+    edge get_edge(int idx){
+        //idx番目の辺の情報を返す
+        //idxは追加された辺のインデックス
+        auto [from,i]=edgeIdx[idx];
+        return G[from][i];
+    }
  
  
     void bfs(int s){
-        level = vector<T>(numV+1,-1);//-1に初期化
+        level = std::vector<T>(numV+1,-1);//-1に初期化
 
-        queue<int> que;
+        std::queue<int> que;
         level[s]=0;
         que.push(s);
         while(!que.empty()){
@@ -173,8 +182,8 @@ template<class T> class FLOW{
     }
 
     //auto edges = (FLOW instance).edges();で受けるしかないかな
-    vector<edge> edges(){
-        vector<edge> ret;
+    std::vector<edge> edges(){
+        std::vector<edge> ret;
         for(int from=0;from<=numV;from++){
             for(const edge &e:G[from]){
                 if( st.find(P(from,e.to))!=st.end() ){
