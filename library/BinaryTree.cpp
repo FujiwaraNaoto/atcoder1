@@ -66,7 +66,7 @@ struct binary_indexed_tree{
     
     binary_indexed_tree(int n){
         bit = vector<ll>(n+1,0);
-        N=n+1;
+        N=n;
     }
 
     ~binary_indexed_tree(){
@@ -125,7 +125,7 @@ template<class Type> struct binary_indexed_tree{
 
     void init(int n){
         bit = vector<Type>(n+1,0);
-        N=n+1;
+        N=n;
     }
 
     void add(int x,Type a){
@@ -168,7 +168,7 @@ template<class Type> struct binary_indexed_tree{
 
     binary_indexed_tree(int n):N(n+1){
         bit = vector<Type>(n+1,0);
-        N=n+1;
+        N=n;
     }
 
 
