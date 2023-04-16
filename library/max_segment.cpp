@@ -3,18 +3,21 @@
 https://atcoder.jp/contests/dp/tasks/dp_t
 Q flowersから抜粋
 */
+#include<vector>
+#include<iostream>
+typedef long long ll;
 
 // segment_tree a(n) みたいに呼び出す
 class segment_tree{
     public:
         
-        vector<ll> dat;
+        std::vector<ll> dat;
         int n=1;
         segment_tree(int n_){    
             while(n < n_){
                 n*=2;
             }
-            dat = vector<ll>(2*n-1,0);// 0,1,2,...,2*n-1,2*n-2
+            dat = std::vector<ll>(2*n-1,0);// 0,1,2,...,2*n-1,2*n-2
         }
 
 
@@ -51,23 +54,40 @@ class segment_tree{
 };
 
 
-// segment_tree<ll> a(n) みたいに呼び出す
 
+// segment_tree<ll,op,e> a(n) みたいに呼び出す
 // Typeにはソートの基準が必要
-template<class Type> class segment_tree{
+
+
+Type op(Type x, Type y){
+    //(x,y)を比較する任意の演算子.今回はmaxとした
+    return max(x,y);
+}
+
+Type e(){
+    //initialize value
+    return 0;
+}
+
+
+template<class Type,
+    Type (*op)(Type,Type),
+    Type (*e)()
+    > class segment_tree{
+    
     public:
         
-        vector<Type> dat;
+        std::vector<Type> dat;
         int n=1;
         segment_tree(int n_){    
             while(n < n_){
                 n*=2;
             }
-            dat = vector<Type>(2*n-1,0);// 0,1,2,...,2*n-1,2*n-2
+            dat = std::vector<Type>(2*n-1,e());// 0,1,2,...,2*n-1,2*n-2
         }
 
         ~segment_tree(){
-            vector<Type>().swap(dat);
+            std::vector<Type>().swap(dat);
         }
 
 
@@ -77,7 +97,7 @@ template<class Type> class segment_tree{
             dat[k] = a;
             while(k>0){
                 k = (k-1)/2;
-                dat[k]=max(dat[2*k+1],dat[2*k+2]);
+                dat[k]=op(dat[2*k+1],dat[2*k+2]);
             }
         }
 
@@ -89,7 +109,7 @@ template<class Type> class segment_tree{
 
                 Type vl = query(a,b,2*k+1,l,(l+r)/2);
                 Type vr = query(a,b,2*k+2,(l+r)/2,r);
-                return max(vl,vr);
+                return op(vl,vr);
             }
         }
 
@@ -103,8 +123,6 @@ template<class Type> class segment_tree{
             return dat[index];
         }
 };
-
-
 
 
 
