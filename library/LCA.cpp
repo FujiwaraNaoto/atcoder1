@@ -105,3 +105,82 @@ class LCA{
 
 };
 
+
+
+
+class LCA{
+
+public:
+
+    
+    int V;//頂点のサイズ
+    std::vector<std::vector<int>> G;
+
+    std::vector<int> depth;
+    std::vector<std::vector<int>> parent;
+
+    int rootV=-1;
+
+    int MAX_LOGV;
+
+    LCA(const std::vector<std::vector<int>>& graph_,int maxlogv=31):G(graph_),MAX_LOGV(maxlogv){
+        V=G.size();
+        depth=std::vector<int>(V,0);
+        parent=std::vector<std::vector<int>>(MAX_LOGV,std::vector<int>(V,-1));
+    }
+
+
+    void dfs(int now,int pre,int d){
+        parent[0][now]=pre;
+        depth[now]=d;
+        for(int to:G[now]){
+            if(to!=pre) dfs(to,now,d+1);
+        }
+    }
+
+    void initLCA(){
+        initLCA(0);
+    }
+
+    void initLCA(int root_){
+        rootV=root_;
+        dfs(rootV,-1,0);
+        for(int k=0;k+1<30;k++){
+            for(int v=0;v<V;v++){
+                if(parent[k][v]<0) parent[k+1][v]=-1;
+                else parent[k+1][v]=parent[k][parent[k][v]];
+            }
+        }        
+        return;
+    }
+   
+
+
+    int operator()(int u,int v){
+        return lca(u,v);
+    }
+
+    int lca(int u,int v){
+        if(depth[u]>depth[v]) swap(u,v);
+
+        for(int k=0;k<30;k++){
+            if((depth[v]-depth[u])>>k &1 ){
+                v=parent[k][v];
+            }
+        }
+
+        if(u==v) return u;
+
+        for(int k=30-1;k>=0;k--){
+            if(parent[k][u]!=parent[k][v]){
+                u=parent[k][u];
+                v=parent[k][v];
+            }
+        }
+        return parent[0][u];
+
+    }
+
+
+
+};
