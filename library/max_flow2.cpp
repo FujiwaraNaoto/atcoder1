@@ -2,8 +2,8 @@
 ABC225をもとに作りました.
 */
 
-//ABC247GはこれだとTLE
-//とりあえず保存
+//ABC247Gのコード
+//ACコード
 #include<iostream>
 #include<set>
 #include<map>
@@ -18,13 +18,13 @@ ABC225をもとに作りました.
 using namespace std;
 typedef long long ll;
 typedef std::pair<int,int> P;
+//const ll INF=1LL<<60;
+//const ll INF=1LL<<30;
 const ll INF=1e12;
 
-//using namespace std;
-/*
-mincost_flow<int, ll> graph;
-として用いる
-*/
+using namespace std;
+
+
 template<class Cap,class Cost>
     class mincost_flow{
 
@@ -59,10 +59,9 @@ template<class Cap,class Cost>
         //constructor
         mincost_flow(int v):V(v){
             G = std::vector<std::vector<edge>>(V,std::vector<edge>{});
-            prevv = std::vector<int>(V,-1);
-            preve = std::vector<int>(V,-1);
+            //このhはflow関数のwhile(f>0){}で使いまわされる
             h=std::vector<Cost>(V,0);//initialize h //potential h
-            dist = std::vector<Cost>(V,INF);
+
         }
 
 
@@ -99,29 +98,28 @@ template<class Cap,class Cost>
         Cap maxflow=f;
        
         Cost mincost=0;
+        //hをいちいち初期化しない
 
-        //h=std::vector<Cost>(V,0);
-        std::fill(h.begin(), h.end(), 0);
 
         while(f>0){
 
             std::priority_queue<std::pair<Cost,int>,vector<std::pair<Cost,int>>, greater<std::pair<Cost,int>>> que; 
-
-            //dist = std::vector<Cost>(V,INF);
-            std::fill(dist.begin(), dist.end(), INF);//これで高速になるみたい
-
+            
+            prevv = std::vector<int>(V,-1);
+            preve = std::vector<int>(V,-1);
+            dist = std::vector<Cost>(V,INF);
+        
             dist[start]=0;
             que.push(std::make_pair(0,start));//頂点番号start 最短距離0
 
-            while(!que.empty()){                
-                //ここが遅いかな
+            while(!que.empty()){
                 auto p= que.top(); que.pop();
                 int v = p.second;
                 
-
+               
                 if(dist[v]<p.first) continue;
                 
-                
+              
 
                 for(int i=0;i<(int)G[v].size();i++){
                     edge &e = G[v][i];
@@ -138,14 +136,12 @@ template<class Cap,class Cost>
             que= decltype(que)();
 
             if(dist[goal]==INF){
-                //return -1;
+                
                 //maxflowすべてを流すことが無理
-                //cout<<"no"<<endl;
                 
                 //return make_pair(-1,mincost);
                 
-                
-                
+                //これでもOK
                 //とりあえず,流すことができた量を答える
                 return make_pair(maxflow-f,mincost);
 
@@ -185,6 +181,7 @@ int main(){
     int N;
     cin>>N;
 
+    //mincost_flow<ll> graph(150+150+10);
     mincost_flow<int,ll> graph(150+150+10);
 
     //1~150が大学
@@ -208,20 +205,17 @@ int main(){
 
 
     vector<ll> ans;
-
+   
+    ll res=0;
     for(int k=1;k<=150;k++){
-        //流量kを流すことを考える
-
-      
-        mincost_flow tmpg=graph;
-        auto [maxflow,mincost]=tmpg.flow(source,sink,k);
-        
-        if(maxflow<k){
-           
+        //流量1ずつ増やすことを流すことを考える
+        auto [maxflow,mincost]=graph.flow(source,sink,1);
+        res+=mincost;
+        if(maxflow<1){
             break;
         }
-      
-        ans.push_back(INF*k-mincost);
+        
+        ans.push_back(INF*k-res);
     }
 
     cout<<ans.size()<<endl;
