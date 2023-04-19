@@ -90,6 +90,9 @@ template<class Type,
             std::vector<Type>().swap(dat);
         }
 
+        void set(int k,Type a){
+            update(k,a);
+        }
 
 
         void update(int k,Type a){
@@ -103,7 +106,7 @@ template<class Type,
 
         //[a,b)
         Type query(int a,int b,int k,int l,int r){
-            if(r<=a || b<=l) return 0;
+            if(r<=a || b<=l) return e();
             if(a<=l && r<=b) return dat[k];
             else{
 
@@ -119,6 +122,11 @@ template<class Type,
         }
 
         Type operator[](int index){
+            index += n-1;
+            return dat[index];
+        }
+
+        Type get(int idx){
             index += n-1;
             return dat[index];
         }
