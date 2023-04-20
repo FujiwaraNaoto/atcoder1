@@ -122,11 +122,11 @@ template<class Type,
         }
 
         Type operator[](int index){
-            index += n-1;
-            return dat[index];
+            
+            return get(index);
         }
 
-        Type get(int idx){
+        Type get(int index){
             index += n-1;
             return dat[index];
         }
