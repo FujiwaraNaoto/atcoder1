@@ -154,7 +154,9 @@ public:
         return;
     }
    
-
+    int distance(int u,int v){
+        return depth[u]+depth[v]-2*depth[lca(u,v)];
+    }
 
     int operator()(int u,int v){
         return lca(u,v);
