@@ -60,3 +60,8 @@ cat Q.log
 ```
 cat A.log
 ```
+
+
+
+## 参考文献
+- https://qiita.com/recuraki/items/d4f4c01f588c421c9ced
