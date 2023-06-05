@@ -46,25 +46,13 @@ public:
         v = find(v);
         if(u==v) return;
 
-        /*
-        if(rank[u]>rank[v]){
-            par[v]=u;
-            //uの傘下へvが入る
-            sz[u]+=sz[v];
-
-        }else{
-            par[u]=v;
-            //vの傘下へuが入る
-            sz[v]+=sz[u];
-            if(rank[u]==rank[v]) rank[v]++;
-        }
-        */
+       
         if(rank[u]<rank[v]) std::swap(u,v);
         //uの傘下へvが入る
         
         //rank[u]>=rank[v]
         par[v]=u;
-        sz[v]+=sz[u];
+        sz[u]+=sz[v];
         if(rank[u]==rank[v])rank[u]++;
 
     }
