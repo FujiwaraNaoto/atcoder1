@@ -46,6 +46,7 @@ public:
         v = find(v);
         if(u==v) return;
 
+        /*
         if(rank[u]>rank[v]){
             par[v]=u;
             //uの傘下へvが入る
@@ -57,7 +58,17 @@ public:
             sz[v]+=sz[u];
             if(rank[u]==rank[v]) rank[v]++;
         }
+        */
+        if(rank[u]<rank[v]) std::swap(u,v);
+        //uの傘下へvが入る
+        
+        //rank[u]>=rank[v]
+        par[v]=u;
+        sz[v]+=sz[u];
+        if(rank[u]==rank[v])rank[u]++;
+
     }
+    
 
     int size(int u){//頂点uが属すグループの大きさを表す.
         u=find(u);

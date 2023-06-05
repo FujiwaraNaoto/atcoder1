@@ -1,6 +1,9 @@
 //最近共通祖先
 /*
 https://atcoder.jp/contests/typical90/tasks/typical90_ai
+
+https://atcoder.jp/contests/abc133/tasks/abc133_f
+
 */
 
 #include<iostream>
@@ -108,33 +111,60 @@ class LCA{
 
 
 
+/*
+
+vector<vector<edge<long long int>>> G;
+
+LCA<long long int> lca(G)
+のように用いる
+
+*/
+
+template<class Type>
+struct edge{
+    int from;
+    int to;
+    Type cost;//実際のfrom,toの距離
+    int color;
+
+    edge(int from_,int to_,Type cost_,int color_):from(from_),to(to_),cost(cost_),color(color_){};
+};
+
+template<class Type>
 class LCA{
 
 public:
 
     
     int V;//頂点のサイズ
-    std::vector<std::vector<int>> G;
+    std::vector<std::vector<edge<Type>>> G;
 
     std::vector<int> depth;
+    std::vector<Type> cost;
     std::vector<std::vector<int>> parent;
 
     int rootV=-1;
 
     int MAX_LOGV;
 
-    LCA(const std::vector<std::vector<int>>& graph_,int maxlogv=31):G(graph_),MAX_LOGV(maxlogv){
+    LCA(const std::vector<std::vector<edge<Type>>>& graph_,int maxlogv=31):G(graph_),MAX_LOGV(maxlogv){
         V=G.size();
         depth=std::vector<int>(V,0);
+        cost=std::vector<Type>(V,0);
         parent=std::vector<std::vector<int>>(MAX_LOGV,std::vector<int>(V,-1));
+
     }
 
 
-    void dfs(int now,int pre,int d){
+    void dfs(int now,int pre,int d,Type c){
         parent[0][now]=pre;
         depth[now]=d;
-        for(int to:G[now]){
-            if(to!=pre) dfs(to,now,d+1);
+        cost[now]=c;
+
+        for(auto e:G[now]){
+            if(e.to==pre) continue;
+            
+            dfs(e.to,now,d+1,e.cost+c);
         }
     }
 
@@ -144,7 +174,7 @@ public:
 
     void initLCA(int root_){
         rootV=root_;
-        dfs(rootV,-1,0);
+        dfs(rootV,-1,0,0);
         for(int k=0;k+1<30;k++){
             for(int v=0;v<V;v++){
                 if(parent[k][v]<0) parent[k+1][v]=-1;
@@ -153,9 +183,13 @@ public:
         }        
         return;
     }
-   
-    int distance(int u,int v){
+    
+    int length(int u,int v){
         return depth[u]+depth[v]-2*depth[lca(u,v)];
+    }
+
+    Type distance(int u,int v){
+        return cost[u]+cost[v]-2*cost[lca(u,v)];
     }
 
     int operator()(int u,int v){
