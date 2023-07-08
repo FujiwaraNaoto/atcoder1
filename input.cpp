@@ -15,16 +15,16 @@ atcoderには必要になることがないけど
 
 int main(){
     std::string input,v;
-    std::getline(cin,input);
+    std::getline(std::cin,input);
     std::stringstream ss(input);
 
-    std::vector<string> test;
+    std::vector<std::string> test;
     while(std::getline(ss,v,' ')){//空白を検知する
         test.push_back(v);
     }
 
     for(const auto &str:test){
-        cout<<str<<endl;
+        std::cout<<str<<std::endl;
     }   
 
 
