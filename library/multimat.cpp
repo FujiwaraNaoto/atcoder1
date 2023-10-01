@@ -9,7 +9,7 @@ vector<vector<ll> > mat(vector<vector<ll> > A,vector<vector<ll> > B,int N){
         for(int j=0;j<N;j++){
             ll ans=0;
             for(int k=0;k<N;k++){
-                ans = (ans + A[i][k]*B[k][j])%MOD;
+                ans = (ans + A[i][k]*B[k][j]%MOD)%MOD;
             }
             C[i][j] = ans;
         }
