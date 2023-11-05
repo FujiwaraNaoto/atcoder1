@@ -130,6 +130,10 @@ template<class Type,
             index += n-1;
             return dat[index];
         }
+
+        void add(int index,Type val){
+            update(index,op(get(index),val));
+        }
 };
 
 
