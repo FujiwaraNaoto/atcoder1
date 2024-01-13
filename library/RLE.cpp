@@ -12,7 +12,7 @@
 #include<fstream>
 typedef long long ll;
 
-std::vector<std::pair<char,int>> compress(const string& s){
+std::vector<std::pair<char,int>> compress(const std::string& s){
     int n=s.size();
     std::vector<std::pair<char,int>> res;
     int cnt=1;
