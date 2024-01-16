@@ -29,3 +29,26 @@ std::vector<std::pair<char,int>> compress(const std::string& s){
     }
     return res;
 }
+
+std::vector<std::pair<char,int>> RLE(const std::string& s){
+    int lens=s.size();
+
+    std::vector<std::pair<char,int>> res;
+    char tmpc=s[0];
+    int idx=0;
+    
+    while(idx<lens){
+        
+        int tmp=0;
+        while(idx<lens && s[idx]==tmpc){
+            tmp++;
+            idx++;
+        }
+        res.push_back(std::make_pair(tmpc,tmp));
+        if(idx<lens){
+            tmpc=s[idx];
+        }
+    }
+
+    return res;
+}
