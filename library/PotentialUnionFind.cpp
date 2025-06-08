@@ -97,10 +97,12 @@ public:
         v = find(v).first;
         if(u==v) return;
 
-       
-        if(rank[u]<rank[v]) std::swap(u,v),w*=(-1);
-        //uの傘下へvが入る
-        
+        if(this->size(u) < this->size(v)){
+            std::swap(u,v);
+            w*=(-1);
+        }
+    
+        //uの傘下へvが入る    
         //rank[u]>=rank[v]
         par[v]=u;
         sz[u]+=sz[v];
@@ -115,7 +117,7 @@ public:
     
 
     int size(int u){//頂点uが属すグループの大きさを表す.
-        u=find(u);
+        u=find(u).first;
         return sz[u];
     }
 
